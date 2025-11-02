@@ -65,6 +65,8 @@ const Navbar = () => {
 
                     <button className='p-2 rounded bg-gray-900 text-gray-300 cursor-pointer' onClick={handleLogout}>Logout</button>
 
+                    ():()
+
                 </div>
 
             </div>

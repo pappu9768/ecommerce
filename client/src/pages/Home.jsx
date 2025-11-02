@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useRef} from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Navbar from '../components/Navbar'
 
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Home = () => {
   const [allShoes, setAllShoes] = useState([])
-  
+
   useEffect(() => {
 
     const getAllProducts = async () => {
@@ -31,6 +31,10 @@ const Home = () => {
 
     getAllProducts();
   }, [])
+
+  const handleBuy = () =>{
+    
+  }
   return (
     <>
 
@@ -52,23 +56,36 @@ const Home = () => {
           {/* right-content */}
           <div className='w-[60%] h-full px-[90px] py-[100px] flex gap-[15px]'>
 
-      
+
             {/* all products */}
             <div className="w-full grid grid-cols-3 gap-6">
               {allShoes.length > 0 ? (
                 allShoes.map((item) => (
                   <div
                     key={item._id}
-                    className="bg-white p-4 w-[230px] h-[350px] rounded-2xl shadow-md flex flex-col justify-between hover:scale-105 transition-transform duration-200"
+                    className="bg-white p-4 w-[230px] h-[400px] rounded-2xl shadow-md flex flex-col justify-between hover:scale-105 transition-transform duration-200"
                   >
-  
+
                     <div>
+                      <img
+                        src={item.productImage}
+                        alt={item.productName}
+                        className='w-full h-64 object-cover rounded-lg shadow-md'
+                      />
                       <h3 className="text-lg font-semibold">{item.productName}</h3>
                       <p className="text-gray-700 font-medium">₹{item.price}</p>
                       <p className="text-gray-500 text-sm mt-1 line-clamp-2">
                         {item.description}
                       </p>
+
+
                     </div>
+                    <button
+                      className='w-full p-[4px] bg-red-400 rounded mt-[6px] cursor-pointer'
+                      onClick={handleBuy}
+                    >
+                      Buy Now
+                    </button>
                   </div>
                 ))
               ) : (

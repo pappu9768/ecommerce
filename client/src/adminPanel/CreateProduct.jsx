@@ -3,26 +3,34 @@ import React from 'react'
 const CreateProduct = () => {
 
     const [newProducts,setNewProducts] = React.useState({
+        imageUrl:null,
         productName:'',
         price:'',
         description:''
+        
     })
 
     const handleCreate = async(e) => {
         e.preventDefault();
-        // console.log(newProducts.productName,newProducts.price,newProducts.description);
+        console.log(newProducts.productName,newProducts.price,newProducts.description,newProducts.imageUrl);
 
         try {
             const url = 'http://localhost:8080/api/v1/admin/adminDashboard';
             const getToken = localStorage.getItem('Tokens');
 
+            const formData  = new FormData();
+            formData.append("productImage",newProducts.imageUrl);
+            formData.append("productName",newProducts.productName);
+            formData.append("price",newProducts.price);
+            formData.append("description",newProducts.description)
+
             const res = await fetch(url,{
                 method:'POST',
                 headers:{
                     'Authorization':`${getToken}`,
-                    'Content-type':'application/json'
+                    // 'Content-type':'application/json'
                 },
-                body:JSON.stringify(newProducts)
+                body:formData
             })
 
             const result = await res.json();
@@ -52,7 +60,10 @@ const CreateProduct = () => {
                              bg-white text-gray-700 cursor-pointer focus:outline-none focus:ring-2 
                              focus:ring-blue-500 focus:border-blue-500 file:mr-4 file:py-2 file:px-4 
                              file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-blue-50 
-                             file:text-blue-700 hover:file:bg-blue-100" 
+                             file:text-blue-700 hover:file:bg-blue-100"
+                            //  value={newProducts.imageUrl}
+                             onChange={(e) => setNewProducts({...newProducts,imageUrl:e.target.files[0]})}
+
                         />
 
                         <label

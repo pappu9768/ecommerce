@@ -6,7 +6,7 @@ export const createProductFromAdmin = async (req, res) => {
     try {
         const { productName, price, description, productImage } = req.body;
 
-        if (!productName || !price || !description || productImage) {
+        if (!productName || !price || !description ) {
             return res.status(400).json({
                 message: "All fields are required",
                 success: false
@@ -23,7 +23,7 @@ export const createProductFromAdmin = async (req, res) => {
             productName,
             price,
             description,
-            productImage:uploadImage.url
+            productImage:uploadImage?.url
         })
 
         const saveProducts = await newProducts.save();

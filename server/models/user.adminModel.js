@@ -1,6 +1,12 @@
 import mongoose from 'mongoose';
 
 const adminSchema = new mongoose.Schema({
+    
+    productImage:{
+        type:String,
+        required:true,
+        
+    },
     productName: {
         type: String,
         required: true
@@ -12,11 +18,6 @@ const adminSchema = new mongoose.Schema({
     description: {
         type: String,
         required: true
-    },
-    productImage:{
-        type:String,
-        required:true,
-        
     }
     // },
     // createdBy:{

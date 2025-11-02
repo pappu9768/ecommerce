@@ -1,37 +1,40 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 const Signup = () => {
-
-  const [signup,setSignup] = React.useState({
-    name:'',
-    email:'',
-    password:'',
-    mobile:''
+  const navigate = useNavigate();
+  const [signup, setSignup] = React.useState({
+    name: '',
+    email: '',
+    password: '',
+    mobile: ''
   })
-  const handleSignup = async(e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-    console.log(signup.name,signup.email,signup.password);
+    console.log(signup.name, signup.email, signup.password);
 
     try {
       const url = 'http://localhost:8080/api/v1/auth/signup';
-      const res = await fetch(url,{
-        method:'POST',
-        headers:{
-          'Content-type':'application/json'
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
         },
-        body:JSON.stringify(signup)
+        body: JSON.stringify(signup)
       })
 
       const signupResult = await res.json();
       console.log(signupResult);
 
-      const {error,message,success} = signupResult;
-      if(success){
+      const { error, message, success } = signupResult;
+      if (success) {
         toast.success(message)
-      }else if(error){
+        setTimeout(() => {
+          navigate('/login')
+        }, 1000)
+      } else if (error) {
         toast.error(error.details[0].message)
-      }else if(!success){
+      } else if (!success) {
         toast.error(message)
       }
 
@@ -39,7 +42,7 @@ const Signup = () => {
       console.log(error)
     }
 
-    
+
 
   }
   return (
@@ -62,7 +65,7 @@ const Signup = () => {
             name="name"
             placeholder="Enter your name..."
             value={signup.name}
-            onChange={(e) => setSignup({...signup,name:e.target.value})}
+            onChange={(e) => setSignup({ ...signup, name: e.target.value })}
             className="mt-1 mb-4 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
           />
 
@@ -75,7 +78,7 @@ const Signup = () => {
             name="email"
             placeholder="Enter your email..."
             value={signup.email}
-            onChange={(e) => setSignup({...signup,email:e.target.value})}
+            onChange={(e) => setSignup({ ...signup, email: e.target.value })}
             className="mt-1 mb-4 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
           />
 
@@ -91,7 +94,7 @@ const Signup = () => {
             name="password"
             placeholder="Enter your password..."
             value={signup.password}
-            onChange={(e) => setSignup({...signup,password:e.target.value})}
+            onChange={(e) => setSignup({ ...signup, password: e.target.value })}
             className="mt-1 mb-6 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
           />
 
@@ -107,7 +110,7 @@ const Signup = () => {
             name="mobile"
             placeholder="Enter your mobile no..."
             value={signup.mobile}
-            onChange={(e) => setSignup({...signup,mobile:e.target.value})}
+            onChange={(e) => setSignup({ ...signup, mobile: e.target.value })}
             className="mt-1 mb-6 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
           />
 
