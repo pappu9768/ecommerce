@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import { ToastContainer } from 'react-toastify'
 import Home from './pages/Home';
 import CreateProduct from './adminPanel/CreateProduct';
+import NotFounf from './components/NotFounf';
 const App = () => {
   const [authorization,setAuthorization] = React.useState(false);
   const [role,setRole] = React.useState(0)
@@ -25,6 +26,7 @@ const App = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/home' element={<Home />} />
         <Route path='/admin' element={<CreateProduct/>} />
+        <Route path='*' element={<NotFounf/>}/>
       </Routes>
 
       <ToastContainer position='top-right'/>

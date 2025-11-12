@@ -115,3 +115,20 @@ export const onlyForName = async(req,res) => {
         })
     }
 }
+
+export const getLoggedIn = (req,res) => {
+    try {
+        res.status(200).json({
+            success:true,
+            user: req.user
+
+
+        })
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            message:"error found while fetching logged in ",
+            error
+        })
+    }
+}

@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import router from './routes/user.routes.js';
 import cors from 'cors';
 import { userAuthorization } from './middlewares/user.authorization.js';
-import { onlyForName } from './controllers/user.controllers.js';
+import { onlyForName,getLoggedIn } from './controllers/user.controllers.js';
 
 dotenv.config();
 
@@ -23,9 +23,10 @@ app.use(express.json());
 app.use('/api/v1/auth',router)
 app.use('/api/v1/admin',router);
 app.get('/api/username',userAuthorization,onlyForName);
-app.use((req, res) => {
-  res.status(404).send(`Cannot ${req.method} ${req.url}`);
-});
+app.get('/api/loggedIn',userAuthorization,getLoggedIn);
+// app.use((req, res) => {
+//   res.status(404).send(`Cannot ${req.method} ${req.url}`);
+// });
 
 
 

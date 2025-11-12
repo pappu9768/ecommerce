@@ -23,5 +23,6 @@ router.post('/adminDashboard',userAuthorization,isAdmin,multerUpload.single("pro
 router.delete('/adminDashboard/:id',userAuthorization,isAdmin,deleteProduct)
 router.put('/adminDashboard/:id',userAuthorization,isAdmin,updateProduct)
 
-
+//who is logged in user or admin
+// router.get('/loggedIn',userAuthorization,)
 export default router
